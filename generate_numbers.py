@@ -5,14 +5,13 @@ def generate_large_numbers(num_numbers, min_digits, max_digits):
     Generates a list of large numbers.
     
     Args:
-       num_numbers: The number of numbers to generate.
+        num_numbers: The number of numbers to generate.
         min_digits: The minimum number of digits for each number.
         max_digits: The maximum number of digits for each number.
 
     Returns:
         A list of large numbers.
     """
-
     numbers = []
     for _ in range(num_numbers):
         num_digits = random.randint(min_digits, max_digits)
@@ -20,12 +19,25 @@ def generate_large_numbers(num_numbers, min_digits, max_digits):
         numbers.append(number)
     return numbers
 
-#Generate a list of 10000 large numbers with a minimum of 10 digits and a maximum of 20 digits
-numbers = generate_large_numbers(10000, 10, 20)
+def generate_numbers_file(filename, num_numbers, min_digits, max_digits):
+    """
+    Generates a list of large numbers and writes them to a file.
+    
+    Args:
+        filename: The name of the file to write to.
+        num_numbers: The number of numbers to generate.
+        min_digits: The minimum number of digits for each number.
+        max_digits: The maximum number of digits for each number.
+    """
+    numbers = generate_large_numbers(num_numbers, min_digits, max_digits)
+    
+    # Write each number to the file on a separate line
+    with open(filename, "w") as file:
+        for number in numbers:
+            file.write(number + "\n")
+    
+    print(f"Numbers saved to {filename}")
 
-#Print each number on separate line
-with open("large_numbers.txt", "w") as file:  
-    for number in numbers:
-        file.write(number + "\n")
-
-print("Numbers saved to large_numbers.txt")
+# Example usage (optional, for testing the script directly)
+if __name__ == "__main__":
+    generate_numbers_file("large_numbers.txt", 10000, 10, 20)
